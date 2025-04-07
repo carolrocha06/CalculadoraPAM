@@ -1,5 +1,4 @@
 // Componente próprio para classificar o IMC 
-import FormIMC from "./FormIMC";
 
 const ClassificarIMC = ( {imcCalculado} ) => { 
     if (imcCalculado < 18.5) {
@@ -24,6 +23,15 @@ const ClassificarIMC = ( {imcCalculado} ) => {
         <Text style={styles.classificarIMC}> Sobre a classificação do IMC: {ClassificarIMC} </Text>
     );
   };
+
+  const styles = StyleSheet.create({
+      result: {
+          marginTop: 20,
+          fontSize: 24,
+          textAlign: 'center',
+          color: '#333',
+      },
+  });
 
   export default ClassificarIMC;
   //setMensagem(classificarIMC);

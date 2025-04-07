@@ -3,6 +3,7 @@
 import { View, TextInput, Button, StyleSheet } from "react-native";
 import Result from "./Result";
 import ClassificarIMC from "./ClassificarIMC";
+import PesoIdeal from "./PesoIdeal";
 //import { SnackBar } from "react-native-paper"; // Parecido com o SnackBar da atividade do ano passado
 
 const FormIMC = () => {
@@ -35,7 +36,9 @@ const FormIMC = () => {
         onChangeText={setAltura}
       />
       <Button title="Calcular IMC" onPress={calcularIMC} />
-      {imc && <Result imc={imc} /> && <ClassificarIMC imcCalculado= {imcCalculado} /> }
+      {imc && <Result imc={imc} />}
+      {<ClassificarIMC imcCalculado= {imcCalculado} />} // Componente próprio
+      {<PesoIdeal alturaMetros= {alturaMetros} />} // Vai passar a variavel como parametro para outro arquivo por meio da tag (com o nome do arquivo) 
     </View>
   );
 };
