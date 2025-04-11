@@ -1,14 +1,16 @@
-import { StyleSheet, View } from 'react-native'; 
+import { StyleSheet, View } from 'react-native';
 // StyleSheet para estilizar cada componente de forma consistente
-import Title from './components/Title';
-import FormIMC from './components/FormIMC';
+import Title from './src/components/Title';
+import FormIMC from './src/components/FormIMC';
 
 export default function App() {
     return (
-        <View style={styles.container}>
-            <Title />
-            <FormIMC />
-        </View>
+        <PaperProvider>
+            <View style={styles.container}>
+                <Title />
+                <FormIMC />
+            </View>
+        </PaperProvider>
     );
 }
 
@@ -20,3 +22,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
 });
+

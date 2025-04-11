@@ -1,12 +1,17 @@
 // Componente próprio para calcular o peso ideal
+import { Text, StyleSheet } from 'react-native';
 
-const CalcularPesoIdeal = ( {alturaMetros} ) => { // Valor da altura já convertido para float
-    // O parametro passado é devi
-    Minimo =  18.5 * (alturaMetros * alturaMetros);
-    Maximo =  24.9 * (alturaMetros * alturaMetros);
+const PesoIdeal = ({ alturaMetros }) => {
+    if (!alturaMetros || isNaN(alturaMetros) || alturaMetros <= 0) {
+      return null; // Não calcula o peso ideal se a altura em metros for invalida
+    }
+
+    const Minimo =  18.5 * (alturaMetros * alturaMetros);
+    const Maximo =  24.9 * (alturaMetros * alturaMetros);
+
     return(
-        <Text style={styles.CalcularPesoIdeal}> Peso Ideal Mínimo: {Minimo} \n 
-        Peso Ideal Máximo: {Maximo}</Text>
+        <Text style={styles.CalcularPesoIdeal}> Peso Ideal Mínimo: {Minimo}kg \n 
+        Peso Ideal Máximo: {Maximo}kg </Text>
     );
 };
 
