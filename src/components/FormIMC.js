@@ -6,13 +6,11 @@ import { useState } from "react";
 import ClassificarIMC from "./ClassificarIMC";
 import PesoIdeal from "./PesoIdeal";
 
-//import { SnackBar } from '@react-native-material/core'; // Parecido com o SnackBar da atividade do ano passado
-
 const FormIMC = () => {
   const [peso, setPeso] = useState(""); // estados são como caixinhas onde guardamos informações que podemos mudar
   const [altura, setAltura] = useState(""); // sempre que algo é alterado, essas caixinhas mudam e a tela reflete as mudancas
   const [imc, setImc] = useState(null);
-  const [error, setError] = useState(""); // novo estado para mensagens de erro
+  const [error, setError] = useState(null); // novo estado para mensagens de erro
 
   const calcularIMC = () => {
     setError("");
