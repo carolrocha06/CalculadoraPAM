@@ -1,89 +1,71 @@
 // Contém o formulário para entrada de dados (peso e altura) e a lógica para calcular o IMC
 
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Text } from "react-native";
 import Result from "./Result";
-import { useState } from "react"; 
+import { useState } from "react";
 import ClassificarIMC from "./ClassificarIMC";
 import PesoIdeal from "./PesoIdeal";
 //import { SnackBar } from '@react-native-material/core'; // Parecido com o SnackBar da atividade do ano passado
 
 const FormIMC = () => {
-  const [peso, setPeso] = useState("");
-  const [altura, setAltura] = useState("");
+  const [peso, setPeso] = useState(""); // estados são como caixinhas onde guardamos informações que podemos mudar
+  const [altura, setAltura] = useState(""); // sempre que algo é alterado, essas caixinhas mudam e a tela reflete as mudancas
   const [imc, setImc] = useState(null);
-  const [mensagem, setMensagem] = useState('');
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
+  const [error, setError] = useState(""); // novo estado para mensagens de erro
 
   const calcularIMC = () => {
+    setError("");
     // Validação mais completa
     const pesoNumerico = parseFloat(peso);
     const alturaNumerica = parseFloat(altura);
-    
-    if (isNaN(pesoNumerico) || isNaN(alturaNumerica) || pesoNumerico <= 0 || alturaNumerica <= 0) {
-      // Aqui você pode adicionar um SnackBar ou alerta para informar o erro
-      console.warn("Por favor, insira valores válidos para peso e altura.");
+    // se o usuário digitar "abc" ou deixar vazio, parseFloat retorna NaN , e mostra um erro
+
+    if (isNaN(pesoNumerico) || // Nan = not a number- quando tentamos fazer algo como transformar uma palavra em numero ou calculos invalidos
+      isNaN(alturaNumerica) || // isNanm - verificar se o valor digitado é um número valido
+      pesoNumerico <= 0 ||
+      alturaNumerica <= 0) {
+
+      setError("Por favor, insira valores válidos para peso e altura"); // para informar o erro
+      setImc(null); // limpa o estado imc em caso de erro
       return;
     }
 
     const alturaMetros = alturaNumerica / 100;
-    const imcCalculado = (pesoNumerico / (alturaMetros * alturaMetros)).toFixed(2);
+    const imcCalculado = (pesoNumerico / (alturaMetros * alturaMetros)).toFixed(2); // arredonda para duas casas decimais
     setImc(imcCalculado);
-
-  // Set mensagem de classificacao pelo Snackbar: 
-  let classificacao = '';
-
-  if (imcCalculado < 18.5) {
-    classificacao = 'Abaixo do Peso';
-  } 
-  else if (imcCalculado >= 18.5 && imcCalculado <= 24.9) {
-    classificacao = 'Peso Normal';
-  } 
-  else if (imcCalculado >= 25 && imcCalculado <= 29.9) {
-    classificacao = 'Sobrepeso';
-  } 
-  else if (imcCalculado >= 30 && imcCalculado <= 34.9) {
-    classificacao = 'Obesidade Grau 1';
-  } 
-  else if (imcCalculado >= 35 && imcCalculado <= 39.9) {
-    classificacao = 'Obesidade Grau 2';
-  } 
-  else if (imcCalculado >= 40) {
-    classificacao = 'Obesidade Grau 3';
-  }
-  setMensagem(`IMC: ${imcCalculado} Classificação do IMC: ${classificacao}`);
-  setSnackbarVisible(true);
-};
+  };
 
   return (
     <View style={styles.formContainer}>
+      <Text style={styles.title}>Calculadora de IMC</Text>
       <TextInput
         style={styles.input}
         placeholder="Peso (kg)"
-        keyboardType="numeric"
+        keyboardType="default" // padrao do sistema
         value={peso}
         onChangeText={setPeso}
       />
       <TextInput
         style={styles.input}
         placeholder="Altura (cm)"
-        keyboardType="numeric"
+        keyboardType="default" // teclado padrao
         value={altura}
         onChangeText={setAltura}
       />
       <Button title="Calcular IMC" onPress={calcularIMC} />
-      {imc && <Result imc={imc} />}
-      {<ClassificarIMC imcCalculado= {imc} />} {/* Componente próprio */}
-      {<PesoIdeal alturaMetros={parseFloat(altura) / 100} />} {/* Passando alturaMetros */} {/*Vai passar a variavel como parametro para outro arquivo por meio da tag (com o nome do arquivo) */}
+      {/* mostra a mensagem de erro se a validacao falhar */}
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-      <Snackbar
-        visible={snackbarVisible}
-        onDismiss={() => setSnackbarVisible(false)}
-        duration={3000}
-        style={styles.snackbar}
-      >
-        {mensagem}
-      </Snackbar>
-    </View>
+      {imc && ( // renderiza componentes só se o imc for calculado/valido 
+        <>
+          <Result imc={imc} />
+          <ClassificarIMC imcCalculado={imc} /> {/* Componente próprio */}
+          {altura && parseFloat(altura) && (
+            <PesoIdeal alturaMetros={parseFloat(altura) / 100} />)} {/*Vai passar a variavel como parametro para outro arquivo por meio da tag (com o nome do arquivo) */}
+        </>
+      )
+      }
+    </View >
   );
 };
 
@@ -101,8 +83,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 8,
-    borderRadius: 5,
+    borderRadius: 15,
     backgroundColor: "white", // Dá um contraste maior
+    justifyContent: 'center',
+  },
+
+  errorText: {
+    color: "white",
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 16,
+    backgroundColor: "red",
   },
 });
 

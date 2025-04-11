@@ -1,12 +1,13 @@
 // Componente próprio para classificar o IMC 
 import { Text, StyleSheet } from 'react-native';
 
-const ClassificarIMC = ({ imcCalculado, setMensagem, setSnackbarVisible }) => {
-  let classificacao = '';
-
+const ClassificarIMC = ({ imcCalculado, setError }) => {
   if (!imcCalculado) {
     return null; // Nao tem como classificar o imc se nao foi calculado antes
   }
+
+  let classificacao = '';
+
   if (imcCalculado < 18.5) {
     classificacao = "Abaixo do Peso!";
   }
@@ -26,13 +27,13 @@ const ClassificarIMC = ({ imcCalculado, setMensagem, setSnackbarVisible }) => {
     classificacao = "Obesidade Grau 3!";
   }
 
-  if (setMensagem && setSnackbarVisible) {
-    setMensagem(classificacao);
-    setSnackbarVisible(true);
+  // classificacao como mensagem de erro
+  if (setError) {
+    setError(`Classificação do IMC: ${classificacao}`);
   }
 
   return (
-    <Text style={styles.classificacao}> Sobre a classificação do IMC: {classificacao} </Text>
+    <Text style={classificacao}> {'\n'} Sobre a Classificação do IMC: {classificacao} </Text>
   );
 };
 
@@ -41,10 +42,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 24,
     textAlign: 'center',
-    color: '#333',
   },
 });
 
 export default ClassificarIMC;
-//setMensagem(classificarIMC);
-//setSnackbarVisible(true);

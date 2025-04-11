@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     result: {
         marginTop: 20,
         fontSize: 24,
+        marginVertical: 10,
         textAlign: 'center',
         color: '#333',
         fontWeight: 'bold', // texto em negrito

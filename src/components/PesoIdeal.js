@@ -6,12 +6,12 @@ const PesoIdeal = ({ alturaMetros }) => {
       return null; // Não calcula o peso ideal se a altura em metros for invalida
     }
 
-    const Minimo =  18.5 * (alturaMetros * alturaMetros);
-    const Maximo =  24.9 * (alturaMetros * alturaMetros);
+    const Minimo =  18.5 * (alturaMetros * alturaMetros)
+    const Maximo =  24.9 * (alturaMetros * alturaMetros)
 
     return(
-        <Text style={styles.CalcularPesoIdeal}> Peso Ideal Mínimo: {Minimo}kg \n 
-        Peso Ideal Máximo: {Maximo}kg </Text>
+        <Text style={styles.CalcularPesoIdeal}> Peso Ideal Mínimo: {Minimo.toFixed(2)}kg {'\n'} 
+        {' '}Peso Ideal Máximo: {Maximo.toFixed(2)}kg </Text>
     );
 };
 

@@ -5,12 +5,10 @@ import FormIMC from './src/components/FormIMC';
 
 export default function App() {
     return (
-        <PaperProvider>
-            <View style={styles.container}>
-                <Title />
-                <FormIMC />
-            </View>
-        </PaperProvider>
+        <View style={styles.container}>
+            <Title />
+            <FormIMC />
+        </View>
     );
 }
 
