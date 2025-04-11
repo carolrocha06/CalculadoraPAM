@@ -7,8 +7,8 @@ const ClassificarIMC = ({ imcCalculado, setError }) => {
   }
 
   let classificacao = '';
-
-  if (imcCalculado < 18.5) {
+  
+  if (imcCalculado < 18.5) { // Classficando o imc de acordo com os valores e suas respostas armazenadas na variavel
     classificacao = "Abaixo do Peso!";
   }
   else if (imcCalculado >= 18.5 && imcCalculado <= 24.9) {
@@ -25,11 +25,6 @@ const ClassificarIMC = ({ imcCalculado, setError }) => {
   }
   else if (imcCalculado >= 40) {
     classificacao = "Obesidade Grau 3!";
-  }
-
-  // classificacao como mensagem de erro
-  if (setError) {
-    setError(`Classificação do IMC: ${classificacao}`);
   }
 
   return (
