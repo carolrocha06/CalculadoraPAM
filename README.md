@@ -2,7 +2,11 @@
 Um aplicativo para calcular o Índice de Massa Corporal (IMC) por meio do React Native e Expo
 
 ## Instruções sobre como baixar ou clonar o projeto
-- Git clone link com o link copiado do botão verde (para copiar é shift insert)
+1) criar repositório 
+2) copiar o botão verde de “código” no git
+3) mkdir nome da pasta
+4) cd nome da pasta
+5) Git clone link com o link copiado do botão verde (para copiar é shift insert)
 
 ## Texto explicativo sobre funcionamento e objetivos
 - As funcionalidades são feitas a partir da utilização dos Hooks como o useState e useEffect
