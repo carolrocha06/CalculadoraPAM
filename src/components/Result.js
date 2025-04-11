@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginVertical: 10,
         textAlign: 'center',
-        color: '#333',
+        color: 'black',
         fontWeight: 'bold', // texto em negrito
     },
 });

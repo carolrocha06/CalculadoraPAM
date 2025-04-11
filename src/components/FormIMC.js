@@ -5,6 +5,7 @@ import Result from "./Result";
 import { useState } from "react";
 import ClassificarIMC from "./ClassificarIMC";
 import PesoIdeal from "./PesoIdeal";
+
 //import { SnackBar } from '@react-native-material/core'; // Parecido com o SnackBar da atividade do ano passado
 
 const FormIMC = () => {
@@ -37,7 +38,6 @@ const FormIMC = () => {
 
   return (
     <View style={styles.formContainer}>
-      <Text style={styles.title}>Calculadora de IMC</Text>
       <TextInput
         style={styles.input}
         placeholder="Peso (kg)"
@@ -52,7 +52,7 @@ const FormIMC = () => {
         value={altura}
         onChangeText={setAltura}
       />
-      <Button title="Calcular IMC" onPress={calcularIMC} />
+      <Button title="Calcular IMC" onPress={calcularIMC} color="black" />
       {/* mostra a mensagem de erro se a validacao falhar */}
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
@@ -72,11 +72,13 @@ const FormIMC = () => {
 const styles = StyleSheet.create({
   // StyleSheet para estilizar cada componente de forma consistente
   formContainer: {
-    flex: 1, // Melhor adaptação a diferentes tamanhos de tela
-    backgroundColor: "#f0f0f0",
+    flex: 1, // melhor adaptacao a diferentes tamanhos de tela
+    backgroundColor: '#B0E0E6',
     padding: 16,
-    borderRadius: 10,
+    maxHeight: 300,
+    borderRadius: 20,
   },
+
   input: {
     height: 40,
     borderColor: "gray",
@@ -96,5 +98,6 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
   },
 });
+
 
 export default FormIMC;
